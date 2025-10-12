@@ -1,0 +1,9 @@
+Copyright © 2025 Wyvern Clover.  
+All rights reserved.
+
+This software and its associated files are the confidential and proprietary property of Wyvern Clover.  
+Unauthorized copying, modification, distribution, or use of this software, in whole or in part, is strictly prohibited.
+
+Use of this software is permitted only by authorized partners, employees, or contractors of Wyvern Clover for the purpose of development, testing, or operation of the CarX platform.
+
+For licensing or partnership inquiries, contact: wyvernclover5@gmail.com
