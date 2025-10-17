@@ -1,32 +1,30 @@
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const connectDB = require('./config/db');
-const path = require('path');
 
-// Load env vars
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
 
-// Connect to database
 connectDB();
 
 const app = express();
-
-// Body parser
+app.use(cors());
 app.use(express.json());
 
-// Enable CORS
-app.use(cors());
+// root
+app.get('/', (req, res) => res.send('CarX API running 🚗'));
+
+// routes
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/vendors', require('./routes/vendorRoutes'));
+app.use('/api/jobs', require('./routes/jobRoutes'));
+app.use('/api/parts', require('./routes/partRoutes'));
+
+// error handler (simple)
+app.use((err, req, res, next) => {
+  console.error(err.stack || err);
+  res.status(500).json({ message: 'Internal Server Error' });
+});
 
 const PORT = process.env.PORT || 5000;
-
-const server = app.listen(PORT, () => {
-  console.log(`CarX backend running on port ${PORT}`);
-});
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
-  console.log(`Error: ${err.message}`);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
